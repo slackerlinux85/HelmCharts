@@ -3,12 +3,12 @@ entries:
   solariot:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2021-10-31T17:21:59.826159041+10:00"
+    created: "2021-10-31T17:37:32.67928914+10:00"
     description: Helm chart for Solariot(modbus based monitoring of solar inverters)
     digest: da374b24763eb7a7064672e22bbfa780bb94c44ca899a56be8624599a79dbcab
     name: solariot
     type: application
     urls:
-    - https://slackerlinux85.github.io/helm-chart/solariot-0.1.0.tgz
+    - https://slackerlinux85.github.io/HelmCharts/solariot-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-31T17:21:59.825571688+10:00"
+generated: "2021-10-31T17:37:32.678687108+10:00"
