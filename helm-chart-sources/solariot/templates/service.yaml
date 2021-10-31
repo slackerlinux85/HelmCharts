@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "solariot.fullname" . }}
+  labels:
+    {{- include "solariot.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    {{- if .Values.metrics.prometheus.enabled }}
+    - port: {{ .Values.metrics.prometheus.port }}
+      targetPort: {{ .Values.metrics.prometheus.port }}
+      protocol: TCP
+      name: prometheus
+    {{- end }}
+  selector:
+    {{- include "solariot.selectorLabels" . | nindent 4 }}

@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "solariot.fullname" . }}-config
+  labels:
+    app: {{ template "solariot.name" . }}
+    chart: {{ template "solariot.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  config.py: |
+    inverter_ip = "{{ .Values.inverter.address }}"
+    inverter_port = {{ .Values.inverter.port }}
+
+    slave = {{ .Values.inverter.slave }}
+    model = "{{ .Values.inverter.model }}"
+    timeout = {{ .Values.inverter.timeout }}
+    scan_interval = {{ .Values.inverter.scan_interval }}
+
+  {{- if .Values.metrics.prometheus.enabled }}
+
+    prometheus = True
+    prometheus_port={{ .Values.metrics.prometheus.port }}
+  {{- end }}
+
+  {{- if .Values.metrics.influxdb.enabled }}
+
+    influxdb_ip = {{ .Values.metrics.influxdb.address }}
+    influxdb_port = {{ .Values.metrics.influxdb.port }}
+    influxdb_database = {{ .Values.metrics.influxdb.db }}
+    influxdb_user = {{ .Values.metrics.influxdb.user }}
+    influxdb_password = {{ .Values.metrics.influxdb.pass }}
+    influxdb_ssl = {{ .Values.metrics.influxdb.ssl }}
+    influxdb_verify_ssl = {{ .Values.metrics.influxdb.verify_ssl }}
+  {{- end }}
+
+  {{- if .Values.metrics.mqtt.enabled }}
+
+    mqtt_server = {{ .Values.metrics.mqtt.address }}
+    mqtt_port = {{ .Values.metrics.mqtt.port }}
+    mqtt_topic = {{ .Values.metrics.mqtt.topic }}
+    mqtt_username = {{ .Values.metrics.mqtt.username }}
+    mqtt_password = {{ .Values.metrics.mqtt.password }}
+  {{- end }}
+
+  {{- if .Values.metrics.pvoutput.enabled }}
+
+    pvoutput_api = {{ .Values.metrics.pvoutput.api }}
+    pvoutput_sid = {{ .Values.metrics.pvoutput.sid }}
+    pvoutput_rate_limit = {{ .Values.metrics.pvoutput.rate_limit }}
+  {{- end }}

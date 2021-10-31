@@ -1,0 +1,7 @@
+apiVersion: v2
+name: solariot
+description: Helm chart for Solariot(modbus based monitoring of solar inverters)
+
+type: application
+version: 0.1.0
+appVersion: "1.16.0"

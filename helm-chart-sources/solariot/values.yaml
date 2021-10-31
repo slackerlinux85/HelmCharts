@@ -1,0 +1,100 @@
+# Default values for solariot.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: meltaxa/solariot
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+inverter:
+  model: "sungrow-sg3ks"
+  address: "192.168.1.230"
+  port: 502
+  slave: 0x01
+  timeout: 3
+  scan_interval: 10
+
+metrics:
+  influxdb:
+    enabled: false
+    address: "192.168.1.128"
+    port: 8086
+    username: "user"
+    password: "password"
+    db: "inverter"
+    ssl: true
+    verify_ssl: false
+  prometheus:
+    enabled: false
+    port: 8000
+  mqtt:
+    enabled: false
+    address: "192.168.1.128"
+    port: 1883
+    topic: "inverter/stats"
+    username: "user"
+    password: "password"
+  pvoutput:
+    enabled: false
+    api: "api key"
+    sid: "system-id"
+    rate_limit: 60
+
+#service for prometheus
+service:
+  type: ClusterIP
+  port: 8000
