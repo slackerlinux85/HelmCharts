@@ -25,7 +25,7 @@
 ```
 2. add helm repo
 
-  `helm repo add solariot https://github.com/slackerlinux85/solariot/helmchart`
+  `helm repo add solariot https://slackerlinux85.github.io/HelmCharts/`
   
 3. dryrun solariot through helm and verify values
 
